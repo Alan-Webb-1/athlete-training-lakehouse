@@ -1,0 +1,6 @@
+activity_id,athlete_id,athlete_name,activity_start_time,distance_miles,duration_minutes,elevation_gain_feet,trackpoint_count,duplicate_activity_flag
+1,1,Alan Webb,6/19/2026 6:42,5.12,41.35,82.4,2450,FALSE
+2,1,Alan Webb,6/20/2026 7:15,6.04,48.9,104.7,2895,FALSE
+3,1,Alan Webb,6/21/2026 6:58,4.75,38.8,76.1,2210,FALSE
+4,2,Mock Athlete A,6/21/2026 7:20,3.2,27.5,45,1605,FALSE
+5,3,Mock Athlete B,6/22/2026 6:50,7.1,58.25,132.6,3350,FALSE
