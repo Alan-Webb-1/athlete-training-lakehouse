@@ -74,3 +74,11 @@ The Terraform configuration defines an AWS S3 lakehouse-style landing zone with 
 - `logs/` — pipeline and validation logs
 
 This phase demonstrates exposure to AWS and Terraform-based infrastructure practices.
+
+## Safe Sample Dataset
+
+A safe sample activity summary dataset is included in:
+
+`data/sample/sample_activity_summary.csv`
+
+This file contains activity-level metrics without exact GPS coordinates. It is intended to demonstrate the pipeline output structure while protecting private location data.
