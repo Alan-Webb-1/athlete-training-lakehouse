@@ -1,6 +1,29 @@
 # Athlete Training Lakehouse
 
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-S3-FF9900?logo=amazonaws&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-IaC-7B42BC?logo=terraform&logoColor=white)
+![Databricks](https://img.shields.io/badge/Databricks-Lakehouse-EF3E42?logo=databricks&logoColor=white)
+![dbt](https://img.shields.io/badge/dbt-Analytics%20Engineering-FF694B?logo=dbt&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-Portfolio-181717?logo=github)
+![License](https://img.shields.io/badge/License-MIT-green)
+
 This project turns raw GPX running files into structured athlete training data for analytics.
+
+## Tech Stack
+
+- Python
+- Git & GitHub
+- AWS S3
+- Terraform
+- Databricks
+- dbt
+- CSV Data Engineering
+- GPX Parsing
+
+## Architecture Overview
+
+![Architecture Diagram](docs/architecture/athlete-training-lakehouse-architecture.png)
 
 ## Project Goal
 
