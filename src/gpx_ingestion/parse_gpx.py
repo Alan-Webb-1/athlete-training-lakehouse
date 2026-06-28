@@ -32,7 +32,7 @@ def haversine_miles(lat1, lon1, lat2, lon2):
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-RAW_GPX_DIR = PROJECT_ROOT / "data" / "raw_gpx" / "alan"
+RAW_GPX_DIR = Path(r"C:\GPX_Processing\raw_gpx")
 ACTIVITIES_OUTPUT = PROJECT_ROOT / "data" / "processed" / "activities" / "activities.csv"
 CLEAN_ACTIVITIES_OUTPUT = PROJECT_ROOT / "data" / "processed" / "activities" / "activities_clean.csv"
 TRACKPOINTS_OUTPUT = PROJECT_ROOT / "data" / "processed" / "trackpoints" / "trackpoints.csv"
@@ -172,35 +172,47 @@ def main():
     all_trackpoints = []
     logs = []
 
-    gpx_files = sorted(RAW_GPX_DIR.glob("*.gpx"))
-
     seen_activities = {}
+    activity_id = 1
 
-    for activity_id, file_path in enumerate(gpx_files, start=1):
-        activity, trackpoints, log = parse_gpx_file(file_path, activity_id)
+    athlete_folders = sorted([p for p in RAW_GPX_DIR.iterdir() if p.is_dir()])
 
-        if activity:
-            duplicate_key = (
-                activity["athlete_id"],
-                activity["activity_start_time"],
-                activity["duration_minutes"],
-                activity["distance_miles"]
+    for athlete_id, athlete_folder in enumerate(athlete_folders, start=1):
+        athlete_name = athlete_folder.name
+        gpx_files = sorted(athlete_folder.glob("*.gpx"))
+
+        for file_path in gpx_files:
+            activity, trackpoints, log = parse_gpx_file(
+                file_path=file_path,
+                activity_id=activity_id,
+                athlete_id=athlete_id,
+                athlete_name=athlete_name
             )
 
-            if duplicate_key in seen_activities:
-                activity["duplicate_activity_flag"] = True
-                activity["duplicate_of_activity_id"] = seen_activities[duplicate_key]
-                log["status"] = "duplicate"
-                log["error_message"] = f"Duplicate of activity_id {seen_activities[duplicate_key]}"
-            else:
-                activity["duplicate_activity_flag"] = False
-                activity["duplicate_of_activity_id"] = ""
-                seen_activities[duplicate_key] = activity["activity_id"]
+            if activity:
+                duplicate_key = (
+                    activity["athlete_id"],
+                    activity["activity_start_time"],
+                    activity["duration_minutes"],
+                    activity["distance_miles"]
+                )
 
-            activities.append(activity)
+                if duplicate_key in seen_activities:
+                    activity["duplicate_activity_flag"] = True
+                    activity["duplicate_of_activity_id"] = seen_activities[duplicate_key]
+                    log["status"] = "duplicate"
+                    log["error_message"] = f"Duplicate of activity_id {seen_activities[duplicate_key]}"
+                else:
+                    activity["duplicate_activity_flag"] = False
+                    activity["duplicate_of_activity_id"] = ""
+                    seen_activities[duplicate_key] = activity["activity_id"]
 
-        all_trackpoints.extend(trackpoints)
-        logs.append(log)
+                activities.append(activity)
+
+            all_trackpoints.extend(trackpoints)
+            logs.append(log)
+
+            activity_id += 1
 
     ACTIVITIES_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     TRACKPOINTS_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
@@ -240,7 +252,9 @@ def main():
     print(f"Clean activities written to: {CLEAN_ACTIVITIES_OUTPUT}")
     print(f"Trackpoints written to: {TRACKPOINTS_OUTPUT}")
     print(f"Logs written to: {LOG_OUTPUT}")
-    print(f"GPX files processed: {len(gpx_files)}")
+    print(f"Athletes processed: {len(athlete_folders)}")
+    print(f"Activities parsed: {len(activities)}")
+    print(f"Clean activities: {len(clean_activities)}")
 
 
 if __name__ == "__main__":
