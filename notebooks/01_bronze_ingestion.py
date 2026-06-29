@@ -21,8 +21,17 @@ database_name = "athlete_training_lakehouse"
 # Source file path
 # In Databricks, upload sample_activity_summary.csv to this path first:
 # /FileStore/athlete_training_lakehouse/sample_activity_summary.csv
+# Path inside the Databricks Git Repo
+# Update this path if cloning the project into a different workspace.
 
-source_path = "/FileStore/athlete_training_lakehouse/sample_activity_summary.csv"
+source_path = "/Workspace/Users/alanbwebb@gmail.com/athlete-training-lakehouse/data/sample/sample_activity_summary.csv"
+
+activity_df = (
+    spark.read
+        .option("header", "true")
+        .option("inferSchema", "true")
+        .csv(source_path)
+)
 
 # Bronze table name
 bronze_table_name = f"{database_name}.bronze_activity_summary"
