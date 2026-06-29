@@ -10,16 +10,19 @@
 
 This project turns raw GPX running files into structured athlete training data for analytics.
 
-## Tech Stack
+## Tech Stack (Implemented)
 
 - Python
 - Git & GitHub
-- AWS S3
 - Terraform
-- Databricks
-- dbt
 - CSV Data Engineering
 - GPX Parsing
+- Data Validation & Duplicate Detection
+
+## Planned Lakehouse Architecture
+- AWS S3 Lakehouse
+- Databricks Bronze / Silver / Gold processing
+- dbt Analytics Models
 
 ## Architecture Overview
 
@@ -71,6 +74,14 @@ The initial Python ingestion pipeline parses raw GPX files into structured CSV o
 
 **Public sample dataset:** 42 anonymized activity records across 2 athletes.
 
+## Safe Sample Dataset
+
+A safe sample activity summary dataset is included in:
+
+`data/sample/sample_activity_summary.csv`
+
+This file contains activity-level metrics without exact GPS coordinates. It is intended to demonstrate the pipeline output structure while protecting private location data.
+
 ### Data Quality Checks
 
 The validation script checks:
@@ -100,7 +111,7 @@ Raw GPX running files exported from Strava/Garmin.
 
 ## Phase 2: AWS S3 + Terraform Infrastructure
 
-Phase 2 adds an infrastructure-as-code layer using Terraform.
+This phase provisions an AWS S3 lakehouse landing zone using Terraform infrastructure-as-code. It demonstrates cloud infrastructure design, reproducible environments, and modern data engineering deployment practices.
 
 The Terraform configuration defines an AWS S3 lakehouse-style landing zone with the following layout:
 
@@ -110,12 +121,36 @@ The Terraform configuration defines an AWS S3 lakehouse-style landing zone with 
 - `gold/` — analytics-ready tables
 - `logs/` — pipeline and validation logs
 
-This phase demonstrates exposure to AWS and Terraform-based infrastructure practices.
+## Phase 3: AWS S3 Lakehouse Deployment (Planned)
 
-## Safe Sample Dataset
+Phase 3 will deploy the Terraform-defined AWS S3 lakehouse landing zone and upload the safe sample dataset.
 
-A safe sample activity summary dataset is included in:
+Planned enhancements include:
 
-`data/sample/sample_activity_summary.csv`
+- Applying Terraform to create the S3 bucket
+- Uploading safe sample activity data to the `raw/` or `bronze/` layer
+- Verifying the S3 folder structure
+- Documenting deployment steps and screenshots
 
-This file contains activity-level metrics without exact GPS coordinates. It is intended to demonstrate the pipeline output structure while protecting private location data.
+## Phase 4: Databricks Lakehouse Processing (Planned)
+
+Phase 4 will extend the pipeline by ingesting validated activity data into Databricks using a Bronze, Silver, and Gold architecture.
+
+Planned enhancements include:
+
+- Loading activity datasets into Delta tables
+- Bronze, Silver, and Gold transformations
+- Lakehouse data quality checks
+- Analytics-ready Gold tables for training metrics
+
+## Phase 5: Analytics Engineering with dbt (Planned)
+
+Phase 5 will build analytics models on top of curated lakehouse data using dbt.
+
+Planned enhancements include:
+
+- dbt staging models
+- Intermediate transformation models
+- Analytics marts
+- dbt tests and documentation
+- Reproducible SQL transformations
