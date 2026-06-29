@@ -69,6 +69,8 @@ The initial Python ingestion pipeline parses raw GPX files into structured CSV o
 - Validation checks passed: 35
 - Validation checks failed: 0
 
+**Public sample dataset:** 42 anonymized activity records across 2 athletes.
+
 ### Data Quality Checks
 
 The validation script checks:
