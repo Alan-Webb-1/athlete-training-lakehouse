@@ -32,7 +32,7 @@ def haversine_miles(lat1, lon1, lat2, lon2):
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-RAW_GPX_DIR = Path(r"C:\GPX_Processing\raw_gpx")
+RAW_GPX_DIR = PROJECT_ROOT / "data" / "raw_gpx"
 ACTIVITIES_OUTPUT = PROJECT_ROOT / "data" / "processed" / "activities" / "activities.csv"
 CLEAN_ACTIVITIES_OUTPUT = PROJECT_ROOT / "data" / "processed" / "activities" / "activities_clean.csv"
 TRACKPOINTS_OUTPUT = PROJECT_ROOT / "data" / "processed" / "trackpoints" / "trackpoints.csv"

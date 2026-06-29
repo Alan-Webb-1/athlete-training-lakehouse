@@ -36,6 +36,17 @@ Parse raw GPX files into two structured datasets:
 - `activities.csv` — one row per run
 - `trackpoints.csv` — one row per GPS point
 
+### Local GPX Input
+
+Real GPX files should be placed locally in:
+
+```text
+data/raw_gpx/Athlete A/
+data/raw_gpx/Athlete B/
+```
+
+The `data/raw_gpx/` folder is ignored by Git to protect private GPS location data.
+
 ## Phase 1 Results
 
 The initial Python ingestion pipeline parses raw GPX files into structured CSV outputs.
@@ -51,6 +62,7 @@ The initial Python ingestion pipeline parses raw GPX files into structured CSV o
 ### Current Run Summary
 
 - GPX files processed: 8
+- Athletes processed: 3
 - Clean activities created: 7
 - Duplicate activities flagged: 1
 - Validation checks run: 35
