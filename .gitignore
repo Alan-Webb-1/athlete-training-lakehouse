@@ -182,4 +182,12 @@ cython_debug/
 
 # Private GPS/location data
 data/raw_gpx/
-data/processed/trackpoints/
+
+# Generated pipeline outputs
+data/processed/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log

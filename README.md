@@ -121,16 +121,24 @@ The Terraform configuration defines an AWS S3 lakehouse-style landing zone with 
 - `gold/` — analytics-ready tables
 - `logs/` — pipeline and validation logs
 
-## Phase 3: AWS S3 Lakehouse Deployment (Planned)
+## Phase 3: AWS S3 Lakehouse Deployment
 
-Phase 3 will deploy the Terraform-defined AWS S3 lakehouse landing zone and upload the safe sample dataset.
+Phase 3 deployed the Terraform-defined AWS S3 lakehouse landing zone and uploaded the safe sample dataset.
 
-Planned enhancements include:
+### Results
 
-- Applying Terraform to create the S3 bucket
-- Uploading safe sample activity data to the `raw/` or `bronze/` layer
-- Verifying the S3 folder structure
-- Documenting deployment steps and screenshots
+- Created S3 bucket: `athlete-training-lakehouse-alan-webb-2026`
+- Enabled versioning
+- Enabled server-side encryption
+- Created lakehouse folder structure:
+  - `raw/gpx/`
+  - `bronze/`
+  - `silver/`
+  - `gold/`
+  - `logs/`
+- Uploaded safe sample dataset to:
+  - `bronze/sample_activity_summary.csv`
+- Verified deployment using AWS CLI.
 
 ## Phase 4: Databricks Lakehouse Processing (Planned)
 
