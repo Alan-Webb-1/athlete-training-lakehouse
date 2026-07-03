@@ -10,7 +10,7 @@
 
 This project turns raw GPX running files into structured athlete training data for analytics.
 
-## Tech Stack (Implemented)
+## Technologies
 
 - Python
 - Git & GitHub
@@ -19,10 +19,14 @@ This project turns raw GPX running files into structured athlete training data f
 - GPX Parsing
 - Data Validation & Duplicate Detection
 
-## Planned Lakehouse Architecture
-- AWS S3 Lakehouse
-- Databricks Bronze / Silver / Gold processing
-- dbt Analytics Models
+## Roadmap
+
+- ✅ Python GPX ETL
+- ✅ AWS S3 Lakehouse
+- ✅ Terraform Infrastructure
+- ✅ Databricks Bronze / Silver / Gold
+- 🔄 dbt Analytics Engineering
+- 🔄 Apache Airflow Orchestration
 
 ## Architecture Overview
 
@@ -140,25 +144,94 @@ Phase 3 deployed the Terraform-defined AWS S3 lakehouse landing zone and uploade
   - `bronze/sample_activity_summary.csv`
 - Verified deployment using AWS CLI.
 
-## Phase 4: Databricks Lakehouse Processing (Planned)
+## Phase 4: AWS S3 + Databricks Lakehouse
 
-Phase 4 will extend the pipeline by ingesting validated activity data into Databricks using a Bronze, Silver, and Gold architecture.
+Overview
 
-Planned enhancements include:
+Phase 4 extends the Athlete Training Lakehouse by integrating AWS S3 with Databricks Unity Catalog to create a Medallion Architecture (Bronze, Silver, Gold). Training activity data is stored in Amazon S3, ingested into Databricks Delta tables, cleaned through a Silver layer, and aggregated into analytics-ready Gold tables.
 
-- Loading activity datasets into Delta tables
-- Bronze, Silver, and Gold transformations
-- Lakehouse data quality checks
-- Analytics-ready Gold tables for training metrics
+This architecture mirrors the cloud data engineering patterns commonly used in modern enterprise lakehouse platforms.
+
+## Architecture
+
+![Architecture Diagram](docs/architecture/athlete-training-lakehouse-architecture.png)
+
+Technologies Used
+- Python
+- Apache Spark
+- Databricks
+- Unity Catalog
+- Delta Lake
+- AWS S3
+- IAM Roles
+- SQL
+
+Implemented
+
+✔ Created a Unity Catalog backed by Amazon S3
+
+✔ Configured Bronze, Silver, and Gold schemas
+
+✔ Loaded athlete activity data directly from S3 into Delta Lake
+
+✔ Built a Bronze Delta table containing raw activity data
+
+✔ Built a Silver Delta table containing validated, deduplicated activities
+
+✔ Built a Gold analytics table summarizing athlete training metrics
+
+### Gold Layer Output
+
+The Gold layer produces analytics-ready Delta tables containing aggregated athlete training metrics, including:
+
+- Total activities
+- Total mileage
+- Average run distance
+- Average run duration
+- Total elevation gain
+- Average elevation gain
+
+Skills Demonstrated
+- AWS S3 data lake storage
+- IAM Role configuration
+- Databricks Unity Catalog
+- External Locations
+- Spark DataFrames
+- Delta Lake tables
+- Medallion Architecture
+- SQL aggregations
+- Cloud ETL development
 
 ## Phase 5: Analytics Engineering with dbt (Planned)
 
-Phase 5 will build analytics models on top of curated lakehouse data using dbt.
+Phase 5 will build reusable analytics models on top of curated Gold tables.
 
 Planned enhancements include:
 
 - dbt staging models
 - Intermediate transformation models
 - Analytics marts
-- dbt tests and documentation
-- Reproducible SQL transformations
+- dbt tests
+- dbt documentation
+- Data lineage
+- Reusable SQL transformations
+
+## Phase 6: Production Pipeline Automation (Planned)
+
+Phase 6 will automate the end-to-end lakehouse pipeline.
+
+Planned enhancements include:
+
+- Databricks Auto Loader
+- Incremental ingestion from Amazon S3
+- Apache Airflow orchestration
+- Scheduled ETL pipelines
+- Pipeline monitoring
+- Automated logging
+- End-to-end workflow automation
+- Incremental ingestion from Amazon S3
+- Apache Airflow orchestration
+- Scheduled ETL pipelines
+- Pipeline monitoring
+- Automated logging
+- End-to-end workflow automation
