@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: int_weekly_training
+    description: Weekly athlete training metrics aggregated from staged activity data.
+    columns:
+      - name: athlete_id
+        tests:
+          - not_null
+
+      - name: athlete_name
+        tests:
+          - not_null
+
+      - name: week_start_date
+        tests:
+          - not_null
+
+      - name: total_activities
+        tests:
+          - not_null
+
+      - name: total_miles
+        tests:
+          - not_null

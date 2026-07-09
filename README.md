@@ -25,7 +25,7 @@ This project turns raw GPX running files into structured athlete training data f
 - ✅ AWS S3 Lakehouse
 - ✅ Terraform Infrastructure
 - ✅ Databricks Bronze / Silver / Gold
-- 🔄 dbt Analytics Engineering
+- ✅ dbt Analytics Engineering
 - 🔄 Apache Airflow Orchestration
 
 ## Architecture Overview
@@ -202,19 +202,39 @@ Skills Demonstrated
 - SQL aggregations
 - Cloud ETL development
 
-## Phase 5: Analytics Engineering with dbt (Planned)
+## Phase 5 – dbt Transformation Layer
 
-Phase 5 will build reusable analytics models on top of curated Gold tables.
+Built a complete dbt analytics layer on top of the Silver dataset.
 
-Planned enhancements include:
+Models:
+• stg_activities
+• int_weekly_training
+• mart_athlete_training_summary
 
-- dbt staging models
-- Intermediate transformation models
-- Analytics marts
-- dbt tests
-- dbt documentation
-- Data lineage
-- Reusable SQL transformations
+Implemented:
+✓ Source definitions
+✓ Data lineage
+✓ Data quality tests
+✓ Documentation
+✓ dbt Docs
+✓ Databricks + dbt integration
+
+Pipeline:
+
+Python
+   ↓
+Bronze
+   ↓
+Silver
+   ↓
+dbt
+  ├─ staging
+  ├─ intermediate
+  └─ marts
+
+  ### dbt Lineage
+
+![dbt Lineage](docs/architecture/phase5_lineage.png)
 
 ## Phase 6: Production Pipeline Automation (Planned)
 
