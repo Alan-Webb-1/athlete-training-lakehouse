@@ -1,8 +1,0 @@
-version: 2
-
-sources:
-  - name: silver
-    catalog: athlete_training
-    schema: silver
-    tables:
-      - name: activities
