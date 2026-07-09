@@ -3,7 +3,7 @@ from pyspark.sql.functions import count, sum, avg, round
 
 spark = SparkSession.builder.getOrCreate()
 
-df = spark.table("athlete_training_lakehouse.silver.activities_silver")
+df = spark.table("workspace.athlete_training_lakehouse.activities_silver")
 
 gold_df = (
     df.groupBy("athlete_id")
@@ -17,7 +17,7 @@ gold_df = (
 )
 
 gold_df.write.mode("overwrite").format("delta").saveAsTable(
-    "athlete_training_lakehouse.gold.athlete_training_summary"
+    "workspace.athlete_training_lakehouse.athlete_training_summary_phase6"
 )
 
 print("Gold aggregation complete")

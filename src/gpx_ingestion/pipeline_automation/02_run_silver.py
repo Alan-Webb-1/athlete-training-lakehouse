@@ -3,7 +3,7 @@ from pyspark.sql.functions import col
 
 spark = SparkSession.builder.getOrCreate()
 
-df = spark.table("athlete_training_lakehouse.bronze.activities_bronze")
+df = spark.table("workspace.athlete_training_lakehouse.activities_bronze")
 
 silver_df = (
     df
@@ -15,7 +15,7 @@ silver_df = (
 )
 
 silver_df.write.mode("overwrite").format("delta").saveAsTable(
-    "athlete_training_lakehouse.silver.activities_silver"
+    "workspace.athlete_training_lakehouse.activities_silver"
 )
 
 print("Silver transformation complete")
