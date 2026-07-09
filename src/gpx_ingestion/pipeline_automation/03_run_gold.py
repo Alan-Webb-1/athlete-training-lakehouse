@@ -17,7 +17,7 @@ gold_df = (
 )
 
 gold_df.write.mode("overwrite").format("delta").saveAsTable(
-    "workspace.athlete_training_lakehouse.athlete_training_summary_phase6"
+    "workspace.athlete_training_lakehouse.athlete_training_summary"
 )
 
 print("Gold aggregation complete")
