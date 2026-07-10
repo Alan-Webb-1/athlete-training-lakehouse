@@ -24,8 +24,6 @@ This project demonstrates an end-to-end cloud data engineering pipeline that ing
 
 ## Project Progress
 
-## Project Progress
-
 - ✅ Phase 1 – Python GPX ETL
 - ✅ Phase 2 – Terraform Infrastructure
 - ✅ Phase 3 – AWS S3 Lakehouse
